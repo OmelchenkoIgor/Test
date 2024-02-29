@@ -1,0 +1,33 @@
+<nz-header>
+  <div class="logo">Logo</div>
+
+  <div>
+    <button nz-button nzType="primary" (click)="open()">
+      <span nz-icon nzType="setting" nzTheme="outline"></span>
+    </button>
+  </div>
+</nz-header>
+
+<div class="wrapper" style="height: 100vh">
+  <gridster [options]="options">
+    <gridster-item *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)">
+      <app-widget-1 *ngIf="item.id === 'block1'"></app-widget-1>
+      <app-widget-2 *ngIf="item.id === 'block2'"></app-widget-2>
+      <app-widget-3 *ngIf="item.id === 'block3'"></app-widget-3>
+      <app-widget-4 *ngIf="item.id === 'block4'"></app-widget-4>
+      <app-widget-5 *ngIf="item.id === 'block5'"></app-widget-5>
+    </gridster-item>
+  </gridster>
+</div>
+
+<nz-drawer
+  [nzVisible]="openDrawer"
+  nzPlacement="right"
+  nzTitle="Basic Drawer"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <button nz-button >Moving mode</button>
+  </ng-container>
+</nz-drawer>
+

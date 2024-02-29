@@ -1,0 +1,37 @@
+nz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0;
+  background: #fff;
+
+  .logo {
+    width: 150px;
+    height: 32px;
+    background: rgba(155, 155, 155, 0.3);
+    margin: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    p {
+      height: 32px;
+      margin: 0;
+    }
+  }
+
+  nz-select {
+    margin-right: 16px;
+
+    ::ng-deep nz-select-top-control {
+      margin-right: 16px;
+    }
+  }
+
+  button {
+    margin-right: 16px;
+  }
+}
