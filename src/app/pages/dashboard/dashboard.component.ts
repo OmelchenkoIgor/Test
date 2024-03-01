@@ -15,7 +15,7 @@ export class DashboardComponent {
   constructor() {
     this.options = {
       // Опції конфігурації сітки
-      gridType: 'fit',
+      gridType: 'verticalFixed',
       pushItems: true,
       margin: 10,
       maxCols: 2,
