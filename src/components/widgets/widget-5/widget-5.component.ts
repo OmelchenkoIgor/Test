@@ -26,7 +26,7 @@ export class Widget5Component implements OnInit{
       series: this.chartData.series,
       chart: {
         type: 'bar',
-        height: 300
+        height: 220
       },
       xaxis: {
         categories: this.chartData.categories

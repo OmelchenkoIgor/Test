@@ -26,7 +26,7 @@ export class Widget1Component  implements OnInit{
       series: this.chartData.series,
       chart: {
         type: 'line',
-        height: 300
+        height: 220
       },
       xaxis: {
         categories: this.chartData.categories

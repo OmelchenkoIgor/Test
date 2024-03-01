@@ -17,7 +17,9 @@ export class DashboardComponent {
       gridType: 'fit',
       pushItems: true,
       margin: 10,
+      maxCols: 2,
       outerMargin: true,
+      displayGrid: 'always',
       draggable: {
         enabled: true
       },
@@ -28,11 +30,11 @@ export class DashboardComponent {
 
     // Створення елементів сітки
     this.items = [
-      { id: 'block1', cols: 4, rows: 4, y: 0, x: 0 }, // Блок 1
-      { id: 'block2', cols: 2, rows: 4, y: 0, x: 2 }, // Блок 2
-      { id: 'block3', cols: 2, rows: 4, y: 0, x: 3 }, // Блок 3
-      { id: 'block4', cols: 2, rows: 4, y: 1, x: 2 }, // Блок 4
-      { id: 'block5', cols: 2, rows: 4, y: 1, x: 3 }, // Блок 5
+      { id: 'block1', cols: 2, rows: 1, y: 0, x: 0 }, // Блок 1
+      { id: 'block2', cols: 1, rows: 1, y: 1, x: 0 }, // Блок 2
+      { id: 'block3', cols: 1, rows: 1, y: 1, x: 1 }, // Блок 3
+      { id: 'block4', cols: 1, rows: 1, y: 2, x: 0 }, // Блок 4
+      { id: 'block5', cols: 1, rows: 1, y: 2, x: 1 }, // Блок 5
     ];
   }
 

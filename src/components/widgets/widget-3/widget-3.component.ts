@@ -20,15 +20,13 @@ export class Widget3Component implements OnInit{
     this.chartOptions = {
       chart: {
         type: 'pie',
-        height: 350
+        width: 600,
+        height: 220
       },
       labels: this.chartData.labels,
       responsive: [{
-        breakpoint: 480,
         options: {
-          chart: {
-            height: 300
-          },
+
           legend: {
             position: 'bottom'
           }

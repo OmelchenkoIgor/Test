@@ -35,7 +35,7 @@ export class Widget4Component implements OnInit{
       series: this.chartData.series,
       chart: {
         type: 'radar',
-        height: 300
+        height: 220
       },
       xaxis: {
         categories: this.chartData.categories
