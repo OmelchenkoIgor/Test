@@ -8,9 +8,9 @@
   </div>
 </nz-header>
 
-<div class="wrapper" style="height: 100vh">
+<div class="wrapper" style="height: 100%">
   <gridster [options]="options">
-    <gridster-item *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)">
+    <gridster-item class="custom-gridster-item" *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)" style="height: auto">
       <app-widget-1 *ngIf="item.id === 'block1'"></app-widget-1>
       <app-widget-2 *ngIf="item.id === 'block2'"></app-widget-2>
       <app-widget-3 *ngIf="item.id === 'block3'"></app-widget-3>
@@ -27,7 +27,7 @@
   (nzOnClose)="close()"
 >
   <ng-container *nzDrawerContent>
-    <button nz-button >Moving mode</button>
+    <button nz-button >Moving mode {{options.draggable.enabled ? 'увімкнено' : 'вимкнено'}}</button>
   </ng-container>
 </nz-drawer>
 

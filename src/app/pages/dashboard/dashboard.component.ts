@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   public options: any;
+  public dashboard: any;
   public items: any[];
 
   public openDrawer = false;
@@ -49,4 +50,5 @@ export class DashboardComponent {
   public close(): void {
     this.openDrawer = false;
   }
+
 }

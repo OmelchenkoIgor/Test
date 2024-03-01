@@ -35,3 +35,10 @@ nz-header {
     margin-right: 16px;
   }
 }
+
+@media only screen and (max-width: 640px) {
+  .custom-gridster-item {
+    height: auto !important;
+  }
+}
+

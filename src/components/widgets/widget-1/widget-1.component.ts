@@ -1,36 +1,103 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import * as ApexCharts from 'apexcharts';
 
 @Component({
   selector: 'app-widget-1',
   templateUrl: './widget-1.component.html',
   styleUrls: ['./widget-1.component.scss']
 })
-export class Widget1Component  implements OnInit{
-  chartData: any;
-  chartOptions: any;
+export class Widget1Component  implements AfterViewInit {
 
-  constructor() { }
+  constructor(private elementRef: ElementRef) { }
 
-  ngOnInit(): void {
-    this.chartData = {
+  ngAfterViewInit(): void {
+    const options = {
+      chart: {
+        height: 250,
+        type: "line"
+      },
+      dataLabels: {
+        enabled: false
+      },
+      colors: ["#FF1654", "#247BA0"],
       series: [
         {
-          name: "Sales",
-          data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+          name: "Series A",
+          data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+        },
+        {
+          name: "Series B",
+          data: [20, 29, 37, 36, 44, 45, 50, 58]
         }
       ],
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
-    };
-
-    this.chartOptions = {
-      series: this.chartData.series,
-      chart: {
-        type: 'line',
-        height: 220
+      stroke: {
+        width: [4, 4]
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "20%"
+        }
       },
       xaxis: {
-        categories: this.chartData.categories
+        categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+      },
+      yaxis: [
+        {
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+            color: "#FF1654"
+          },
+          labels: {
+            style: {
+              colors: "#FF1654"
+            }
+          },
+          title: {
+            text: "Series A",
+            style: {
+              color: "#FF1654"
+            }
+          }
+        },
+        {
+          opposite: true,
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+            color: "#247BA0"
+          },
+          labels: {
+            style: {
+              colors: "#247BA0"
+            }
+          },
+          title: {
+            text: "Series B",
+            style: {
+              color: "#247BA0"
+            }
+          }
+        }
+      ],
+      tooltip: {
+        shared: false,
+        intersect: true,
+        x: {
+          show: false
+        }
+      },
+      legend: {
+        horizontalAlign: "left",
+        offsetX: 40
       }
     };
+
+    const chart = new ApexCharts(this.elementRef.nativeElement.querySelector('#chart'), options);
+    chart.render();
   }
 }

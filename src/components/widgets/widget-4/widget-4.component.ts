@@ -1,45 +1,99 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import * as ApexCharts from 'apexcharts';
 
 @Component({
   selector: 'app-widget-4',
   templateUrl: './widget-4.component.html',
   styleUrls: ['./widget-4.component.scss']
 })
-export class Widget4Component implements OnInit{
-  chartData: any;
-  chartOptions: any;
+export class Widget4Component implements AfterViewInit {
+  constructor(private elementRef: ElementRef) {
+  }
 
-  constructor() { }
-
-  ngOnInit(): void {
-
-    this.chartData = {
-      series: [
-        {
-          name: 'Series 1',
-          data: [80, 50, 30, 40, 60, 70]
-        },
-        {
-          name: 'Series 2',
-          data: [20, 30, 40, 80, 50, 70]
-        },
-        {
-          name: 'Series 3',
-          data: [44, 76, 78, 13, 43, 22]
-        }
-      ],
-      categories: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5', 'Category 6']
-    };
-
-    this.chartOptions = {
-      series: this.chartData.series,
+  ngAfterViewInit(): void {
+    const options = {
       chart: {
-        type: 'radar',
-        height: 220
+        height: 200,
+        type: "line",
+        stacked: false
+      },
+      dataLabels: {
+        enabled: false
+      },
+      colors: ['#99C2A2', '#C5EDAC', '#66C7F4'],
+      series: [
+
+        {
+          name: 'Column A',
+          type: 'column',
+          data: [21.1, 23, 33.1, 34, 44.1, 44.9, 56.5, 58.5]
+        },
+        {
+          name: "Column B",
+          type: 'column',
+          data: [10, 19, 27, 26, 34, 35, 40, 38]
+        },
+        {
+          name: "Line C",
+          type: 'line',
+          data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+        },
+      ],
+      stroke: {
+        width: [4, 4, 4]
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "20%"
+        }
       },
       xaxis: {
-        categories: this.chartData.categories
+        categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+      },
+      yaxis: [
+        {
+          seriesName: 'Column A',
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+          },
+          title: {
+            text: "Columns"
+          }
+        },
+        {
+          seriesName: 'Column A',
+          show: false
+        }, {
+          opposite: true,
+          seriesName: 'Line C',
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+          },
+          title: {
+            text: "Line"
+          }
+        }
+      ],
+      tooltip: {
+        shared: false,
+        intersect: true,
+        x: {
+          show: false
+        }
+      },
+      legend: {
+        horizontalAlign: "left",
+        offsetX: 40
       }
     };
+
+    const chart = new ApexCharts(this.elementRef.nativeElement.querySelector('#chart'), options);
+    chart.render();
   }
 }

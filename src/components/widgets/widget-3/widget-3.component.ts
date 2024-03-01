@@ -1,37 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import * as ApexCharts from 'apexcharts';
 
 @Component({
   selector: 'app-widget-3',
   templateUrl: './widget-3.component.html',
   styleUrls: ['./widget-3.component.scss']
 })
-export class Widget3Component implements OnInit{
-  chartData: any;
-  chartOptions: any;
+export class Widget3Component implements AfterViewInit {
+  constructor(private elementRef: ElementRef) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.chartData = {
-      series: [44, 55, 13, 43, 22],
-      labels: ['Apple', 'Banana', 'Orange', 'Mango', 'Grapes']
-    };
-
-    this.chartOptions = {
+  ngAfterViewInit(): void {
+    const options = {
       chart: {
-        type: 'pie',
-        width: 600,
-        height: 220
+        height: 250,
+        type: 'radialBar',
       },
-      labels: this.chartData.labels,
-      responsive: [{
-        options: {
-
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
+      series: [70],
+      labels: ['Progress'],
     };
+
+    const chart = new ApexCharts(this.elementRef.nativeElement.querySelector('#chart'), options);
+    chart.render();
   }
 }
