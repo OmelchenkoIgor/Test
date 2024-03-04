@@ -23,6 +23,8 @@ import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 
 registerLocaleData(en);
 
@@ -49,7 +51,9 @@ registerLocaleData(en);
     NzLayoutModule,
     NzButtonModule,
     NzIconModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzDropDownModule,
+    NzCheckboxModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

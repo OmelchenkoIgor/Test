@@ -13,89 +13,39 @@ export class Widget1Component  implements AfterViewInit {
   ngAfterViewInit(): void {
     const options = {
       chart: {
-        height: 250,
-        type: "line"
+        height: 220,
+        type: "area"
       },
       dataLabels: {
-        enabled: false
+        enabled: true
       },
-      colors: ["#FF1654", "#247BA0"],
       series: [
         {
-          name: "Series A",
-          data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
-        },
-        {
-          name: "Series B",
-          data: [20, 29, 37, 36, 44, 45, 50, 58]
+          name: "Series 1",
+          data: [45, 52, 38, 45, 19, 23, 2]
         }
       ],
-      stroke: {
-        width: [4, 4]
-      },
-      plotOptions: {
-        bar: {
-          columnWidth: "20%"
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.7,
+          opacityTo: 0.9,
+          stops: [0, 90, 100]
         }
       },
       xaxis: {
-        categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
-      },
-      yaxis: [
-        {
-          axisTicks: {
-            show: true
-          },
-          axisBorder: {
-            show: true,
-            color: "#FF1654"
-          },
-          labels: {
-            style: {
-              colors: "#FF1654"
-            }
-          },
-          title: {
-            text: "Series A",
-            style: {
-              color: "#FF1654"
-            }
-          }
-        },
-        {
-          opposite: true,
-          axisTicks: {
-            show: true
-          },
-          axisBorder: {
-            show: true,
-            color: "#247BA0"
-          },
-          labels: {
-            style: {
-              colors: "#247BA0"
-            }
-          },
-          title: {
-            text: "Series B",
-            style: {
-              color: "#247BA0"
-            }
-          }
-        }
-      ],
-      tooltip: {
-        shared: false,
-        intersect: true,
-        x: {
-          show: false
-        }
-      },
-      legend: {
-        horizontalAlign: "left",
-        offsetX: 40
+        categories: [
+          "01 Jan",
+          "02 Jan",
+          "03 Jan",
+          "04 Jan",
+          "05 Jan",
+          "06 Jan",
+          "07 Jan"
+        ]
       }
-    };
+    }
 
     const chart = new ApexCharts(this.elementRef.nativeElement.querySelector('#chart'), options);
     chart.render();

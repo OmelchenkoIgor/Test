@@ -2,6 +2,10 @@
   <div class="logo">Logo</div>
 
   <div>
+    <button nz-button nzType="primary" (click)="addBlock()">
+      <span nz-icon nzType="appstore-add" nzTheme="outline"></span>
+    </button>
+
     <button nz-button nzType="primary" (click)="open()">
       <span nz-icon nzType="setting" nzTheme="outline"></span>
     </button>
@@ -10,15 +14,31 @@
 
 <div class="wrapper" style="height: 100%">
   <gridster [options]="options">
-    <gridster-item class="custom-gridster-item" *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)" style="height: auto">
-      <app-widget-1 *ngIf="item.id === 'block1'"></app-widget-1>
-      <app-widget-2 *ngIf="item.id === 'block2'"></app-widget-2>
-      <app-widget-3 *ngIf="item.id === 'block3'"></app-widget-3>
-      <app-widget-4 *ngIf="item.id === 'block4'"></app-widget-4>
-      <app-widget-5 *ngIf="item.id === 'block5'"></app-widget-5>
+    <gridster-item class="custom-gridster-item" *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)" (contextmenu)="contextMenu($event, menu, item)" (dblclick)="contextMenu($event, menu, item)">
+      <ng-container *ngIf="item.component === null">
+        <button nz-button nzType="primary" (mousedown)="removeItem(item)" class="btn-remove-block">
+          <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </button>
+      </ng-container>
+      <ng-container *ngComponentOutlet="getComponent(item.component)"></ng-container>
     </gridster-item>
   </gridster>
 </div>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item (click)="deleteItem()">Delete widget</li>
+    <li nz-submenu nzTitle="Add widget">
+      <ul>
+        <li nz-menu-item (click)="addWidget('app-widget-1')" [nzDisabled]="isWidgetAdded('app-widget-1')">Area Charts new</li>
+        <li nz-menu-item (click)="addWidget('app-widget-2')" [nzDisabled]="isWidgetAdded('app-widget-2')">Area Charts</li>
+        <li nz-menu-item (click)="addWidget('app-widget-3')" [nzDisabled]="isWidgetAdded('app-widget-3')">RadialBar Charts</li>
+        <li nz-menu-item (click)="addWidget('app-widget-4')" [nzDisabled]="isWidgetAdded('app-widget-4')">Column Charts</li>
+        <li nz-menu-item (click)="addWidget('app-widget-5')" [nzDisabled]="isWidgetAdded('app-widget-5')"> Candlestick Charts</li>
+      </ul>
+    </li>
+  </ul>
+</nz-dropdown-menu>
 
 <nz-drawer
   [nzVisible]="openDrawer"
@@ -27,7 +47,21 @@
   (nzOnClose)="close()"
 >
   <ng-container *nzDrawerContent>
-    <button nz-button >Moving mode {{options.draggable.enabled ? 'увімкнено' : 'вимкнено'}}</button>
+    <label
+      nz-checkbox
+      [(ngModel)]="options.draggable.enabled"
+      (ngModelChange)="changedOptions()"
+      *ngIf="options.draggable"
+    >Drag Items {{ options.draggable.enabled ? 'увімкнено' : 'вимкнено' }}</label>
+
+    <label
+      nz-checkbox
+      [(ngModel)]="options.resizable.enabled"
+      *ngIf="options.resizable"
+      (ngModelChange)="changedOptions()"
+    >Resize Items {{ options.draggable.enabled ? 'увімкнено' : 'вимкнено' }}</label>
   </ng-container>
+
+
 </nz-drawer>
 
