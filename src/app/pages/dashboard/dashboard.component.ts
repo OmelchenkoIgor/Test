@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, HostListener, ViewChild} from '@angular/core';
 import {NzContextMenuService, NzDropdownMenuComponent} from "ng-zorro-antd/dropdown";
 import {GridsterItem} from "angular-gridster2";
 import {Widget1Component} from "../../../components/widgets/widget-1/widget-1.component";
@@ -13,6 +13,7 @@ import {Widget5Component} from "../../../components/widgets/widget-5/widget-5.co
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+
   @ViewChild('menu') menu: NzDropdownMenuComponent;
 
   public options: any;
@@ -20,6 +21,8 @@ export class DashboardComponent {
   public selectedWidget: any;
 
   public openDrawer = false;
+
+  isDesktop: boolean;
 
   constructor(private nzContextMenuService: NzContextMenuService) {
     this.options = {
@@ -47,6 +50,8 @@ export class DashboardComponent {
       { id: 'block4', component: 'app-widget-4', cols: 1, rows: 1, y: 2, x: 0 }, // Блок 4
       { id: 'block5', component: 'app-widget-5', cols: 1, rows: 1, y: 2, x: 1 }, // Блок 5
     ];
+
+    this.isDesktop = window.innerWidth > 768;
   }
 
   public onItemChange(event: any) {
@@ -131,5 +136,10 @@ export class DashboardComponent {
     } else {
       console.log("Item not found in the array!");
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isDesktop = window.innerWidth > 768; // Перевірка ширини екрану при зміні розміру вікна
   }
 }

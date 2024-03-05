@@ -14,7 +14,7 @@
 
 <div class="wrapper" style="height: 100%">
   <gridster [options]="options">
-    <gridster-item class="custom-gridster-item" *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)" (contextmenu)="contextMenu($event, menu, item)" (dblclick)="contextMenu($event, menu, item)">
+    <gridster-item class="custom-gridster-item" *ngFor="let item of items" [item]="item" (itemChange)="onItemChange($event)" (contextmenu)="isDesktop && contextMenu($event, menu, item)" (dblclick)="isDesktop && contextMenu($event, menu, item)">
       <ng-container *ngIf="item.component === null">
         <button nz-button nzType="primary" (mousedown)="removeItem(item)" class="btn-remove-block">
           <span nz-icon nzType="delete" nzTheme="outline"></span>
